@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <title>Мои заказы</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/c/women">Для неё</a>
+                    <ul class="submenu">
+                        <li><a href="/c/women/dress">Платья</a></li>
+                        <li><a href="/c/women/sweatshirt">Свитшоты</a></li>
+                        <li><a href="/c/women/jeans">Джинсы</a></li>
+                        <li><a href="/c/women/t-shirt">Футболки</a></li>
+                        <li><a href="/c/women/jacket">Куртки</a></li>
+                        <li><a href="/c/women/blouse">Блузки</a></li>
+                        <li><a href="/c/women/skirt">Юбки</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/c"><i class="fa fa-lemon logo"></i>WILDFRUIT</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/c/men">Для него</a>
+                    <ul class="submenu">
+                        <li><a href="/c/men/t-shirt">Футболки</a></li>
+                        <li><a href="/c/men/jeans">Джинсы</a></li>
+                        <li><a href="/c/men/pants">Брюки</a></li>
+                        <li><a href="/c/men/shirt">Рубашки</a></li>
+                        <li><a href="/c/men/shorts">Шорты</a></li>
+                        <li><a href="/c/men/hoodie">Толстовки</a></li>
+                        <li><a href="/c/men/jacket">Куртки</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="catalog-header">
+            <h2 class="catalog-title">Мои заказы</h2>
+            <span class="catalog-counter">{{orders.length}} заказ(a)</span>
+        </div>
+        <section class="order-list">
+            {{#if empty}}
+            <div id="empty">
+                <h2>Список заказов пуст</h2>
+            </div>
+            {{else}}
+            {{#each orders}}
+            <div class="order">
+                <h2 class="order-number">Заказ №{{this.id}}</h2>
+                <p class="order-date">{{this.date}}</p>
+                <table>
+                    {{#each this.products}}
+                    <tr>
+                        <td style="width: 10%;"><img src="/images/{{this.location}}"></td>
+                        <td style="width: 70%;">{{this.name}} / {{this.color}}</td>
+                        <td style="width: 10%;">{{this.quantity}} шт.</td>
+                        <td style="width: 10%;">{{this.total}} ₽</td>
+                    </tr>
+                    {{/each}}
+                </table>
+                <p class="total">Итого: {{this.total}} ₽</p>
+            </div>
+            {{/each}}
+            {{/if}}
+        </section>
+    </main>
+    <script src="/js/cart.js"></script>
+</body>
+</html>

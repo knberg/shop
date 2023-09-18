@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <title>Одежда</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/c/women">Для неё</a>
+                    <ul class="submenu">
+                        <li><a href="/c/women/dress">Платья</a></li>
+                        <li><a href="/c/women/sweatshirt">Свитшоты</a></li>
+                        <li><a href="/c/women/jeans">Джинсы</a></li>
+                        <li><a href="/c/women/t-shirt">Футболки</a></li>
+                        <li><a href="/c/women/jacket">Куртки</a></li>
+                        <li><a href="/c/women/blouse">Блузки</a></li>
+                        <li><a href="/c/women/skirt">Юбки</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/c"><i class="fa fa-lemon logo"></i>WILDFRUIT</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/c/men">Для него</a>
+                    <ul class="submenu">
+                        <li><a href="/c/men/t-shirt">Футболки</a></li>
+                        <li><a href="/c/men/jeans">Джинсы</a></li>
+                        <li><a href="/c/men/pants">Брюки</a></li>
+                        <li><a href="/c/men/shirt">Рубашки</a></li>
+                        <li><a href="/c/men/shorts">Шорты</a></li>
+                        <li><a href="/c/men/hoodie">Толстовки</a></li>
+                        <li><a href="/c/men/jacket">Куртки</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="catalog-header">
+            <h2 class="catalog-title">{{header}}</h2>
+            <span class="catalog-counter">{{models.length}} товаров</span>
+        </div>
+        <div class="container">
+            <div class="product-container" id="products">
+				{{#each models}}
+				<div class="product-card" data-product-id="{{this.products.0.id}}" data-model="{{this.modelId}}">
+					<div class="image-box">
+						<img class="product-image" src="/images/{{this.products.0.location}}">
+					</div>
+					<p class="product-title">{{this.name}}</p>
+					<div class="product-price-stock">
+						<span class="product-price"><span class="product-price-value">{{this.price}}</span> ₽</span>
+						<span class="product-stock">/ <span class="product-stock-value">{{this.products.0.quantity}}</span> в наличии </span>
+					</div>
+					<div class="color-listing">
+						{{#each this.products}}
+                        {{#if @index}}
+						<label class="color-selector {{this.color}}" data-product-id="{{this.id}}"></label>
+                        {{else}}
+                        <label class="color-selector {{this.color}} selected" data-product-id="{{this.id}}"></label>
+                        {{/if}}
+                        <label for="purple"><span class="purple"></span></label>
+						{{/each}}
+					</div>
+					<div class="add-to-cart">
+						<i class="fa fa-minus-circle minus-button quantity-button"></i>
+						<div class="quantity-counter" data-quantity="1">В корзину</div>
+						<i class="fa fa-plus-circle plus-button quantity-button"></i>
+					</div>
+				</div>
+				{{/each}}
+            </div>
+            <div class="cart-button">
+                <a href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                <span class="cart-indicator"></span>
+            </div>
+        </div>
+    </main>
+    <div id="modal-window">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modal-image">
+    </div>
+	<script src="/js/main.js"></script>
+</body>
+</html>

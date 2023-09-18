@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <title>Корзина</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/c/women">Для неё</a>
+                    <ul class="submenu">
+                        <li><a href="/c/women/dress">Платья</a></li>
+                        <li><a href="/c/women/sweatshirt">Свитшоты</a></li>
+                        <li><a href="/c/women/jeans">Джинсы</a></li>
+                        <li><a href="/c/women/t-shirt">Футболки</a></li>
+                        <li><a href="/c/women/jacket">Куртки</a></li>
+                        <li><a href="/c/women/blouse">Блузки</a></li>
+                        <li><a href="/c/women/skirt">Юбки</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="/c"><i class="fa fa-lemon logo"></i>WILDFRUIT</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/c/men">Для него</a>
+                    <ul class="submenu">
+                        <li><a href="/c/men/t-shirt">Футболки</a></li>
+                        <li><a href="/c/men/jeans">Джинсы</a></li>
+                        <li><a href="/c/men/pants">Брюки</a></li>
+                        <li><a href="/c/men/shirt">Рубашки</a></li>
+                        <li><a href="/c/men/shorts">Шорты</a></li>
+                        <li><a href="/c/men/hoodie">Толстовки</a></li>
+                        <li><a href="/c/men/jacket">Куртки</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="cart">
+            <div id="cart-items">
+                {{#if empty}}
+                <div id="empty">
+                    <h2>Корзина пуста</h2>
+                </div>
+                {{else}}
+                {{#each cartItems}}
+                <div class="cart-item" data-product-id="{{this.id}}">
+                    <div class="item-image-box">
+                        <img src="/images/{{this.location}}">
+                    </div>
+                    <div class="item-info">
+                        <div class="item-title">{{this.name}}</div>
+                        <div class="item-color">
+                            <span class="property-name">Цвет:</span>
+                            <span class="property-value color">{{this.color}}</span>  
+                        </div>
+                        <div class="item-quantity">
+                            <span class="property-name">Количество:</span>
+                            <span class="property-value quantity">{{this.quantity}}</span>  
+                        </div>
+                        <div class="item-price"><span class="price-value">{{this.price}}</span> ₽</div>
+                    </div>
+                    <div class="remove-item" onclick="removeItem({{this.id}})">
+                        <i class="fa fa-trash"></i>
+                    </div>
+                </div>
+                {{/each}}
+                {{/if}}
+            </div>
+            <div>
+                <div class="container-light">
+                    <h2>Оформить заказ</h2>
+                    <form id="order-form" method="POST" action="/cart/order">
+                        <label for="name">Ваше имя:</label>
+                        <input type="text" id="name" name="name" required>
+                        <label for="email">Ваш Email:</label>
+                        <input type="text" id="email" name="email" required>
+                        <input type="text" placeholder="Промокод" id="promo">
+                        <div class="final-price">
+                            <label>Итого:</label>
+                            <p><span id="final-price-value"></span> ₽</p>
+                        </div>
+                        <button type="submit">Заказать</button>
+                    </form>
+                </div>
+                <div class="container-light" id="my-orders">
+                    <h2>Мои заказы</h2>
+                    <form method="POST" action="/cart/show-orders">
+                        <label for="name">Введите ваш email</label>
+                        <input type="text" id="email" name="email" required>
+                        <button type="submit">Посмотреть</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="/js/cart.js"></script>
+</body>
+</html>
